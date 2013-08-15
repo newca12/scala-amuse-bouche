@@ -1,0 +1,56 @@
+/* To explore this file :
+
+Run scala from the shell:
+	Welcome to Scala version 2.10.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_25).
+	Type in expressions to have them evaluated.
+	Type :help for more information.
+
+	scala>
+
+Load up this file:
+	scala> :load Part1.scala
+	Loading Part1.scala...
+	import scala.io.Source
+	...
+	...
+	scala>
+
+Try stuff:
+	scala> 2 +2
+	res1: Int = 4
+
+	scala> println(poem)
+	occasional clouds
+	one gets a rest
+	from moon-viewing
+
+	scala> main
+	from moon-viewing
+	occasional clouds
+	one gets a rest
+*/
+import scala.io.Source
+
+val poem = Source.fromFile("poem").mkString
+
+def lines (s: String) = Source.fromString(s).getLines.toList
+def unlines(xs: List[String]) = xs.mkString("\n")
+def sort(l :List[String]) = l.sorted
+
+def process(s:String) = (unlines _ compose sort compose lines)(s)
+
+def main = println(process(poem))
+
+	// show the poem in REPL with:
+	//	scala> print(poem)
+
+def sort(l :List[String]) = l.sorted
+def reverse(l :List[String]) = l.reverse
+def firstTwo(l :List[String]) = l.take(2)
+def sortLines(s:String) = (unlines _ compose sort compose lines)(s)
+def reverseLines(s:String) = (unlines _ compose reverse compose lines)(s)
+def firstTwoLines(s:String) = (unlines _ compose firstTwo compose lines)(s)
+
+	//try applying to the poem in REPL:
+	//	scala> println(sortLines(poem))
+	//	scala> println(reverseLines(poem))
