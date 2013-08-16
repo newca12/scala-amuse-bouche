@@ -16,7 +16,7 @@ Load up this file:
 	scala>
 
 Try stuff:
-	scala> 2 +2
+	scala> 2 + 2
 	res1: Int = 4
 
 	scala> println(poem)
@@ -44,7 +44,6 @@ def main = println(process(poem))
 	// show the poem in REPL with:
 	//	scala> print(poem)
 
-def sort(l :List[String]) = l.sorted
 def reverse(l :List[String]) = l.reverse
 def firstTwo(l :List[String]) = l.take(2)
 def sortLines(s:String) = (unlines _ compose sort compose lines)(s)
@@ -54,3 +53,40 @@ def firstTwoLines(s:String) = (unlines _ compose firstTwo compose lines)(s)
 	//try applying to the poem in REPL:
 	//	scala> println(sortLines(poem))
 	//	scala> println(reverseLines(poem))
+
+def byLines(f: (List[String]) => List[String]) =  unlines _ compose f compose lines
+
+def sortLines_ = byLines(sort)
+def reverseLines_ = byLines(reverse)
+def firstTwoLines_ = byLines(firstTwo)
+
+
+def indent(s:String) = "    " + s
+
+// This is commented out, because it won't compile:
+//	def indentLines = byLines(indent)
+
+def map(f: String => String)(l: List[String]): List[String] =   l map f
+
+def indentEachLine(s:String) = byLines(map(indent))(s)
+
+def eachLine(f: String => String) = unlines _ compose map(f) compose lines
+
+def indentEachLine_ = eachLine(indent)
+
+
+def yell(s:String) = s.toUpperCase() + "!!!"
+
+def yellEachLine = eachLine(yell)
+
+
+def words(s:String) = s.split(" ").toList
+def unwords(l: List[String]) = l.mkString(" ")
+
+def eachWord(f: String => String) = unwords _ compose map(f) compose words
+
+def yellEachWord = eachWord(yell)
+
+def eachWordOnEachLine(f: String => String)  = eachLine (eachWord(f))
+
+def yellEachWordOnEachLine = eachWordOnEachLine(yell)
