@@ -14,5 +14,5 @@ def dropOne[T](l: List[T]) = l match {
 
 def justOne[T](l: List[T]) = l match {
   case Nil => Nil
-  case (first :: rest) => first
+  case (first :: rest) => first :: Nil
 }
