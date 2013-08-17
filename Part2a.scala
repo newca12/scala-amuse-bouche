@@ -12,11 +12,11 @@ lazy val mystery3: List[String] = Link("pineapple", mystery3)
 val mystery4 = Link( 42, (Link("apple", EndOfList))) //this is OK with Scala :-)
 
 def dropOne[T](l :List[T]) = l match {
-	case _:EndOfList.type => l
-	case _ => l.asInstanceOf[Link[T]].rest
+  case _:EndOfList.type => l
+  case _ => l.asInstanceOf[Link[T]].rest
 }
 
 def justOne[T](l :List[T]) = l match {
-	case _:EndOfList.type => l
-	case _ => Link(l.asInstanceOf[Link[T]].first, EndOfList)
+  case _:EndOfList.type => l
+  case _ => Link(l.asInstanceOf[Link[T]].first, EndOfList)
 }
