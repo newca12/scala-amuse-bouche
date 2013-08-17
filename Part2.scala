@@ -8,6 +8,7 @@ val twoWords = Link("banana",(Link("cantaloupe",EndOfList)))
 
 val mystery1 = Link("pear",empty)
 val mystery2 = Link("peach",oneWord)
+lazy val mystery3: List[String] = Link("pineapple", mystery3)
 val mystery4 = Link( 42, (Link("apple", EndOfList))) //this is OK with Scala :-)
 
 def dropOne[T](l :List[T]) = l match {
