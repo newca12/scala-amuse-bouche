@@ -3,7 +3,7 @@
 ## About ##
 This is a Scala port of a short technical talk about some fun things in Haskell by Mark Lentczner :
 
-[Video](http://www.youtube.com/watch?v=b9FagOVqxmI)
+[Video](http://www.youtube.com/watch?v=b9FagOVqxmI)  
 [Haskell code and slides](https://github.com/mzero/haskell-amuse-bouche)
 
 scala-amuse-bouche is an EDLA project.
