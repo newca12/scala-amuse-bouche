@@ -1,5 +1,5 @@
 abstract class Maybe[+T]
-case class Just[T](val e :T) extends Maybe[T]
+case class Just[T](e :T) extends Maybe[T]
 case object Nothing extends Maybe
 
 def pickMessage[T](e: Maybe[T]) = e match {
@@ -19,7 +19,7 @@ def findAfterChar(m:Char, s: String) :Maybe[Char] = s.toList match {
   case d :: Nil => Nothing
 }
 
-def findAfterElement[A](m:A, s:List[A]) :Maybe[A] = s match {
+def findAfterElement[A <% Comparable[A]](m:A, s:List[A]) :Maybe[A] = s match {
   case c :: d :: r => if (c == m) Just(d)
 		      else findAfterElement(m, d :: r)
   case d :: Nil => Nothing

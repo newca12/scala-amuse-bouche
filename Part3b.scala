@@ -10,7 +10,7 @@ def favoriteShow(s: String) = s match {
   case _ => None
 }
 
-case class Person(val name :String, val year :Int)
+case class Person(name :String, year :Int)
 
 val amy = Person(name = "Amy", year = 1971)
 val cam = Person(name = "Cam", year = 1989)

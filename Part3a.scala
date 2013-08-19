@@ -20,18 +20,10 @@ def addWeek(date: GregorianCalendar) = {
 
 val interestingDates = new GregorianCalendar(1966, 9, 8) :: new GregorianCalendar(1969, 6, 21) :: new GregorianCalendar(1969, 10, 29) :: Nil
 
-def anInterestingDate = firstOne_( interestingDates)
+def anInterestingDate = firstOne_(interestingDates)
 
-//def aWeekLater =  anInterestingDate.flatMap(addWeek(_)) //Short syntax won't compile
-def aWeekLater = anInterestingDate match {
-  case Some(x) => addWeek(x)
-  case None => None
-}
+def aWeekLater =  anInterestingDate.map(addWeek(_))
 
-//def maybeAddWeek_(date: Option[GregorianCalendar]) = date.flatMap(addWeek(_)) //Short syntax won't compile
-def maybeAddWeek(date: Option[GregorianCalendar]) = date match {
-  case Some(x) => addWeek(x)
-  case None => None
-}
+def maybeAddWeek(date: Option[GregorianCalendar]) = date.map(addWeek(_))
 
 def aWeekLater_  = maybeAddWeek(anInterestingDate)
