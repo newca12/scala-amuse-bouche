@@ -66,7 +66,7 @@ def indent(s:String) = "    " + s
 // This is commented out, because it won't compile:
 //	def indentLines = byLines(indent)
 
-def map(f: String => String)(l: List[String]): List[String] =   l map f
+def map(f: String => String)(l: List[String]) = l map f
 
 def indentEachLine(s:String) = byLines(map(indent))(s)
 
