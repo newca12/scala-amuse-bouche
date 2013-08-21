@@ -34,10 +34,10 @@ import scala.io.Source
 val poem = Source.fromFile("poem").mkString
 
 def lines (s: String) = Source.fromString(s).getLines.toList
-def unlines(xs: List[String]) = xs.mkString("\n")
+val unlines: List[String] => String = _.mkString("\n")
 def sort(l :List[String]) = l.sorted
 
-def process(s:String) = (unlines _ compose sort compose lines)(s)
+def process(s:String) = (unlines compose sort compose lines)(s)
 
 def main = println(process(poem))
 
@@ -46,15 +46,15 @@ def main = println(process(poem))
 
 def reverse(l :List[String]) = l.reverse
 def firstTwo(l :List[String]) = l.take(2)
-def sortLines(s:String) = (unlines _ compose sort compose lines)(s)
-def reverseLines(s:String) = (unlines _ compose reverse compose lines)(s)
-def firstTwoLines(s:String) = (unlines _ compose firstTwo compose lines)(s)
+def sortLines(s:String) = (unlines compose sort compose lines)(s)
+def reverseLines(s:String) = (unlines compose reverse compose lines)(s)
+def firstTwoLines(s:String) = (unlines compose firstTwo compose lines)(s)
 
 	//try applying to the poem in REPL:
 	//	scala> println(sortLines(poem))
 	//	scala> println(reverseLines(poem))
 
-def byLines(f: (List[String]) => List[String]) =  unlines _ compose f compose lines
+def byLines(f: (List[String]) => List[String]) = unlines compose f compose lines
 
 def sortLines_ = byLines(sort)
 def reverseLines_ = byLines(reverse)
@@ -70,7 +70,7 @@ def map(f: String => String)(l: List[String]) = l map f
 
 def indentEachLine(s:String) = byLines(map(indent))(s)
 
-def eachLine(f: String => String) = unlines _ compose map(f) compose lines
+def eachLine(f: String => String) = unlines compose map(f) compose lines
 
 def indentEachLine_ = eachLine(indent)
 
@@ -81,12 +81,12 @@ def yellEachLine = eachLine(yell)
 
 
 def words(s:String) = s.split(" ").toList
-def unwords(l: List[String]) = l.mkString(" ")
+val unwords: List[String] => String = _.mkString(" ")
 
-def eachWord(f: String => String) = unwords _ compose map(f) compose words
+def eachWord(f: String => String) = unwords compose map(f) compose words
 
 def yellEachWord = eachWord(yell)
 
-def eachWordOnEachLine(f: String => String)  = eachLine (eachWord(f))
+def eachWordOnEachLine(f: String => String) = eachLine (eachWord(f))
 
 def yellEachWordOnEachLine = eachWordOnEachLine(yell)
